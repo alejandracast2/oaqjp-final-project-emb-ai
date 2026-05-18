@@ -1,3 +1,5 @@
+import json
+
 import requests
 
 
@@ -29,7 +31,14 @@ def emotion_detector(text_to_analyze):
         json=myobj,
         headers=header
     )
-
-    return response.text
     
+    formatted_response = json.loads(response.text)
+    
+    datos = formatted_response['emotionPredictions'][0]["emotion"]
+    
+    max_datos = max(datos, key=datos.get)
+    
+    datos["dominant_emotion"] = max_datos
+    
+    return datos
     
