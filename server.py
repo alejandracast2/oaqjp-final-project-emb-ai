@@ -8,7 +8,7 @@ def emotion_detector_route():
     '''Route for emotion detection.'''
 
     # Get the text to analyze from the query parameters
-    text_to_analyze = request.args.get('text')
+    text_to_analyze = request.args.get('textToAnalyze')
 
     # Analyze the emotion of the given text
     emotion_result = emotion_detector(text_to_analyze)
