@@ -31,14 +31,30 @@ def emotion_detector(text_to_analyze):
         json=myobj,
         headers=header
     )
+
+    datos = {}
     
-    formatted_response = json.loads(response.text)
-    
-    datos = formatted_response['emotionPredictions'][0]["emotion"]
-    
-    max_datos = max(datos, key=datos.get)
-    
-    datos["dominant_emotion"] = max_datos
+    if response.status_code == 200:
+        formatted_response = json.loads(response.text)
+        datos = formatted_response['emotionPredictions'][0]["emotion"]
+        max_datos = max(datos, key=datos.get)
+        datos["dominant_emotion"] = max_datos
+
+    elif response.status_code == 400:
+        datos["anger"] = None
+        datos["disgust"] = None
+        datos["fear"] = None
+        datos["joy"] = None
+        datos["sadness"] = None
+        datos["dominant_emotion"] = None
+
+    else:
+        datos["anger"] = None
+        datos["disgust"] = None
+        datos["fear"] = None
+        datos["joy"] = None
+        datos["sadness"] = None
+        datos["dominant_emotion"] = None
     
     return datos
     
