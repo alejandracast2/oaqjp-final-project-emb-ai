@@ -13,8 +13,18 @@ def emotion_detector_route():
     # Analyze the emotion of the given text
     emotion_result = emotion_detector(text_to_analyze)
 
+    dominant_emotion = emotion_result["dominant_emotion"]
+
+    if dominant_emotion is None:
+        return "Invalid text! Please try again!"
+
     # Return the result as a JSON response
-    return f"For the given statement, the system response is 'anger': {emotion_result['anger']}, 'disgust': {emotion_result['disgust']}, 'fear': {emotion_result['fear']}, 'joy': {emotion_result['joy']} and 'sadness': {emotion_result['sadness']}. The dominant emotion is {emotion_result['dominant_emotion']}"
+    return (
+        f"For the given statement, the system response is 'anger':"
+        f"{emotion_result['anger']}, 'disgust': {emotion_result['disgust']},"
+        f"'fear': {emotion_result['fear']}, 'joy': {emotion_result['joy']} and "
+        f"'sadness': {emotion_result['sadness']}. The dominant emotion is {emotion_result['dominant_emotion']}" 
+    )
 
 @app.route("/")
 def render_index_page():
