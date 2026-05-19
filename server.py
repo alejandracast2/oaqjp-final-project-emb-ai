@@ -1,3 +1,7 @@
+"""
+Flask server for emotion detection application.
+"""
+
 from flask import Flask, render_template, request
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -23,7 +27,8 @@ def emotion_detector_route():
         f"For the given statement, the system response is 'anger':"
         f"{emotion_result['anger']}, 'disgust': {emotion_result['disgust']},"
         f"'fear': {emotion_result['fear']}, 'joy': {emotion_result['joy']} and "
-        f"'sadness': {emotion_result['sadness']}. The dominant emotion is {emotion_result['dominant_emotion']}" 
+        f"'sadness': {emotion_result['sadness']}. The dominant emotion is"
+        f" {emotion_result['dominant_emotion']}" 
     )
 
 @app.route("/")
